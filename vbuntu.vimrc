@@ -19,6 +19,11 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'bluz71/vim-nightfly-colors'
 Plugin 'psliwka/vim-smoothie'
+Plugin 'SirVer/ultisnips' | Plugin 'honza/vim-snippets'
+Plugin 'alvan/vim-closetag'
+Plugin 'dense-analysis/ale'
+Plugin 'othree/html5.vim'
+Plugin 'Yggdroot/indentLine'
 " Plugin 'file:///home/sr/projects/firstplugin'
 " Plugin 'file:///home/sr/projects/example-plugin'
 " All of your Plugins must be added before this line
@@ -27,7 +32,13 @@ call vundle#end()            " required
 
 " GENERAL SETTINGS ------------------------------{{{ 
 
-" set mouse=a
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+if has('mouse')
+    set mouse=a
+endif
 
 set history=5000
 
@@ -55,19 +66,17 @@ set tabstop=4
 " when indenting with '>', use 4 spaces width
 set shiftwidth=4
 " On pressing tab, insert 4 spaces
+
 set expandtab
+set smarttab
+
+set autoindent
+set smartindent
 
 " autocmd FileType c call tagbar#autoopen(0)
 " Open tagbar automatically in Python files, optional
 " autocmd FileType python call tagbar#autoopen(0)
 set foldmethod=marker
-
-augroup vim-colors-xcode
-    autocmd!
-augroup END
-
-autocmd vim-colors-xcode ColorScheme * hi Comment        cterm=italic gui=italic
-autocmd vim-colors-xcode ColorScheme * hi SpecialComment cterm=italic gui=italic
 
 "}}}
 
@@ -80,7 +89,9 @@ set termguicolors
 "let g:xcodedark_green_comments=1
 "let g:xcodedark_match_paren_style=1
 set background=dark
-colorscheme nightfly
+colorscheme gruvbox
+let g:indentLine_setColors = 0
+"let g:indentLine_char = '┆'
 "}}}
 
 " STATUSLINE ---------------------------------------{{{
@@ -89,17 +100,19 @@ set laststatus=2
 " Set status as git status (branch), optional
 set statusline=%{FugitiveStatusline()}
 set statusline+=\ %f
-set statusline+=%{&modified?'*':''}
+set statusline+=%R
+set statusline+=%{&modified?'[+]':''}
 set statusline+=%=
 " following is right aligned"
+set statusline+=row:\ %l\ col:\ %c\ \ \  
 set statusline+=[%p%%]
 set showcmd
 "}}}
 
 " MAPINGS ----------------------------------------------------{{{
 nnoremap Y y$
-nnoremap o o<Esc>
-nnoremap O O<Esc>
+"nnoremap o o<Esc>
+"nnoremap O O<Esc>
 " nnoremap n nzz
 " nnoremap N Nzz
 nnoremap <F8> :TagbarToggle<CR>
@@ -116,6 +129,7 @@ nnoremap <Leader>p :w \| !clear;python3 %<CR>
 " nnoremap <Leader>s :!chmod +x % && source %<CR>
 " nnoremap <Leader>c :!clang % -o %:r && ./%:r<CR>
 " nnoremap <Leader>j :!javac % && java %:r<CR>
+
 
 " }}}
 
