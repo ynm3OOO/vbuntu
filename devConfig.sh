@@ -14,8 +14,7 @@ cd ~/.ssh
 ssh-keygen -t ed25519 -C "noman.j.land@gmail.com"
 cat id_ed25519.pub
 cd -
-echo -e "copy the public key to github setting\n
-then press Enter to continue"
+echo -e "copy the public key to github setting\nthen press Enter to continue"
 echo "https://github.com/settings/keys"
 read -r input
 if [[ -n $input ]]; then
@@ -25,9 +24,10 @@ fi
 
 echo "update and upgrade apt..."
 
-sudo apt update && apt upgrade
+sudo apt update && sudo apt upgrade
 
 echo "installing apt packages..."
+
 sudo apt install vim bat exuberant-ctags git
 
 
