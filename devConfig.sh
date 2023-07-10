@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
 
-# download binaries
+echo "creating symlink to configure files..."
+
+ln -s ./vbuntu.vimrc ~/.vimrc 
+ln -s ./vbuntu.bashrc ~/.custom_bashrc
+
+echo -e "if [ -f ~/.custom_bashrc ]; then\n\t. ~/.custom_bashrc\nfi" >> .bashrc
+
+
+echo "generating ssh public key for github..."
 
 cd ~/.ssh
-ssh-keygen -o -t rsa -C “ssh@github.com”
-cat id_rsa.pub
+ssh-keygen -t ed25519 -C "noman.j.land@gmail.com"
 cd -
 echo -e "copy the public key to github setting\n
 then press Enter to continue"
@@ -14,23 +21,21 @@ if [[ -n $input ]]; then
     exit
 fi
 
-apt update && apt upgrade
-apt install vim bat exuberant-ctags git
+
+echo "update and upgrade apt"
+
+sudo apt update && apt upgrade
+sudo apt install vim bat exuberant-ctags git
+
+
+echo "installing fzf..."
+
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
+
+echo "installing Vundle..."
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-# configure
-
-if [[ ! -d "Documents" ]]; then
-    mkdir ~/Documents
-fi
-
-cd Documents
-git clone --depth 1 git@github.com:ynm3OOO/vbuntu.git
-cd -
-ln -s ~/Documents/vbuntu/vbuntu.vimrc ~/.vimrc 
-ln -s ~/Documents/vbuntu/vbuntu.bashrc ~/.custom_bashrc
-echo -e "if [ -f ~/.custom_bashrc ]; then\n. ~/.custom_bashrc\nfi" >> .bashrc
+echo "installing Vim plugins through Vundle..."
 vim +PluginInstall +qall
 echo "dev environment updated"
