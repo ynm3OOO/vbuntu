@@ -12,6 +12,7 @@ echo "generating ssh public key for github..."
 
 cd ~/.ssh
 ssh-keygen -t ed25519 -C "noman.j.land@gmail.com"
+cat id_ed25519.pub
 cd -
 echo -e "copy the public key to github setting\n
 then press Enter to continue"
