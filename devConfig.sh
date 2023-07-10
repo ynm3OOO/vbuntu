@@ -2,10 +2,10 @@
 
 echo "creating symlink to configure files..."
 
-ln -s ./vbuntu.vimrc ~/.vimrc 
-ln -s ./vbuntu.bashrc ~/.custom_bashrc
+ln -s $(pwd)/vbuntu.vimrc ~/.vimrc 
+ln -s $(pwd)/vbuntu.bashrc ~/.custom_bashrc
 
-echo -e "if [ -f ~/.custom_bashrc ]; then\n\t. ~/.custom_bashrc\nfi" >> .bashrc
+echo -e "if [ -f ~/.custom_bashrc ]; then\n\t. ~/.custom_bashrc\nfi" >> ~/.bashrc
 
 
 echo "generating ssh public key for github..."
@@ -22,9 +22,11 @@ if [[ -n $input ]]; then
 fi
 
 
-echo "update and upgrade apt"
+echo "update and upgrade apt..."
 
 sudo apt update && apt upgrade
+
+echo "installing apt packages..."
 sudo apt install vim bat exuberant-ctags git
 
 
@@ -32,6 +34,7 @@ echo "installing fzf..."
 
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
+source ~/.bashrc
 
 echo "installing Vundle..."
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
