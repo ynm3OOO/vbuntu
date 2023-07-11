@@ -11,7 +11,7 @@ echo -e "\nif [ -f ~/.custom_bashrc ]; then\n\t. ~/.custom_bashrc\nfi" >> ~/.bas
 echo "generating ssh public key for github..."
 
 cd ~/.ssh
-ssh-keygen -t ed25519 -C "noman.j.land@gmail.com"
+yes | ssh-keygen -t ed25519 -C "noman.j.land@gmail.com"
 cat id_ed25519.pub
 cd -
 echo -e "copy the public key to github setting\nthen press Enter to continue"
@@ -34,12 +34,11 @@ sudo apt install vim bat exuberant-ctags git
 echo "installing fzf..."
 
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
+yes | ~/.fzf/install
 
 echo "installing Vundle..."
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 echo "installing Vim plugins through Vundle..."
 vim +PluginInstall +qall
-source ~/.bashrc
-echo "dev environment updated"
+echo "dev environment setup complete, please\nsource ~/.bashrc"
