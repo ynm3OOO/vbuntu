@@ -2,6 +2,12 @@
 
 echo "creating symlink to configure files..."
 
+if [ -f ~/.vimrc ]; then
+    echo ".vimrc already exists, copy original file to .custom_bashrc."
+    cp ~/.vimrc ~/.vimrc_bak
+    rm ~/.vimrc
+fi
+
 ln -s $(pwd)/vbuntu.vimrc ~/.vimrc 
 ln -s $(pwd)/vbuntu.bashrc ~/.custom_bashrc
 
