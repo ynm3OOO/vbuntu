@@ -24,6 +24,8 @@ Plugin 'alvan/vim-closetag'
 Plugin 'dense-analysis/ale'
 Plugin 'othree/html5.vim'
 Plugin 'Yggdroot/indentLine'
+" StackExchange Automatically place closing curly brace on new line
+Plugin 'jiangmiao/auto-pairs'
 " Plugin 'file:///home/sr/projects/firstplugin'
 " Plugin 'file:///home/sr/projects/example-plugin'
 " All of your Plugins must be added before this line
@@ -32,9 +34,6 @@ call vundle#end()            " required
 
 " GENERAL SETTINGS ------------------------------{{{ 
 
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 if has('mouse')
     set mouse=a
@@ -110,6 +109,11 @@ set showcmd
 "}}}
 
 " MAPINGS ----------------------------------------------------{{{
+
+" snippets mapping
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 nnoremap Y y$
 "nnoremap o o<Esc>
 "nnoremap O O<Esc>
