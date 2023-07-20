@@ -110,6 +110,8 @@ set showcmd
 
 " MAPINGS ----------------------------------------------------{{{
 
+inoremap <C-e> <del>
+
 " snippets mapping
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
