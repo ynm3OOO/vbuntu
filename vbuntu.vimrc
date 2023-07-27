@@ -17,15 +17,21 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'morhetz/gruvbox'
+Plugin 'lifepillar/vim-wwdc17-theme'
+Bundle 'sonph/onehalf', {'rtp': 'vim/'}
+Plugin 'tyrannicaltoucan/vim-deep-space'
 Plugin 'bluz71/vim-nightfly-colors'
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'psliwka/vim-smoothie'
 Plugin 'SirVer/ultisnips' | Plugin 'honza/vim-snippets'
 Plugin 'alvan/vim-closetag'
 Plugin 'dense-analysis/ale'
 Plugin 'othree/html5.vim'
 Plugin 'Yggdroot/indentLine'
+Plugin 'tpope/vim-commentary'
 " StackExchange Automatically place closing curly brace on new line
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'pangloss/vim-javascript'
 " Plugin 'file:///home/sr/projects/firstplugin'
 " Plugin 'file:///home/sr/projects/example-plugin'
 " All of your Plugins must be added before this line
@@ -35,9 +41,9 @@ call vundle#end()            " required
 " GENERAL SETTINGS ------------------------------{{{ 
 
 
-if has('mouse')
-    set mouse=a
-endif
+"if has('mouse')
+"    set mouse=a
+"endif
 
 set history=5000
 
@@ -48,8 +54,8 @@ syntax on
 set nocompatible              " be iMproved, required
 filetype off                  " required
 " highlight 81 column
-highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
+"highlight ColorColumn ctermbg=magenta
+"call matchadd('ColorColumn', '\%81v', 100)
 
 set ignorecase
 set smartcase
@@ -57,7 +63,6 @@ set incsearch
 set hlsearch
 set shortmess-=S
 set number
-set cursorline
 filetype plugin indent on    " required
 
 " show existing tab with 4 spaces width
@@ -80,18 +85,35 @@ set foldmethod=marker
 "}}}
 
 " COLORSCHEME ------------------------------{{{ 
-set termguicolors
-
-"let g:xcodelight_green_comments=1
-"let g:xcodelight_match_paren_style=1
-"colorscheme xcodelight
-"let g:xcodedark_green_comments=1
-"let g:xcodedark_match_paren_style=1
-set background=dark
-colorscheme gruvbox
-let g:indentLine_setColors = 0
-"let g:indentLine_char = '┆'
+"set termguicolors
+"set t_Co=256
+set background=light
+colorscheme solarized
 "}}}
+
+" CURSOR -----------------------------------{{{
+
+"change cursor shape according to vim mode
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
+set cursorline 
+"set cursorcolumn
+hi clear CursorLine
+augroup CLClear
+    autocmd! ColorScheme * hi clear CursorLine
+augroup END
+
+" hi clear CursorColumn
+" augroup CLClear
+"     autocmd! ColorScheme * hi clear CursorColumn
+" augroup END
+
+hi CursorLineNR cterm=bold,italic ctermfg=white ctermbg=yellow
+augroup CLNRSet
+    autocmd! ColorScheme * hi CursorLineNR cterm=bold
+augroup END
+" }}} 
 
 " STATUSLINE ---------------------------------------{{{
 " Show status bar, optional
@@ -110,8 +132,8 @@ set showcmd
 
 " MAPINGS ----------------------------------------------------{{{
 
+let g:AutoPairsShortcutToggle = '<c-a>'
 inoremap <C-e> <del>
-
 " snippets mapping
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
